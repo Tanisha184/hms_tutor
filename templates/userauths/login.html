@@ -1,0 +1,58 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block content %}
+       
+
+
+
+
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post" action="{% url 'userauths:login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} <form action="">
+    {% csrf_token %}
+    <input type="email" name='email' id=''>
+    <input type="password" name='password' id=''>
+    <button type='submit'>Login</button>
+</form> {% endcomment %}
+
+{% for m in messages %}
+    {{m}}
+{% endfor %}
+
+
+<form action="{% url 'userauths:login' %}" method="POST">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input type="email" placeholder="Enter your Email" name="email" id="email" placeholder="Enter your email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" placeholder="Enter your Pas" name="password" id="password" placeholder="Enter your password" required>
+
+    <button type="submit">Login</button>
+</form>
+
+{% endblock %}

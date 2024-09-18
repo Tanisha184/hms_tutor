@@ -1,0 +1,20 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Display any messages, such as success or error notifications -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="alert {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>Sign Up</h2>
+    <form action="{% url 'userauths:sign-up' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign up</button>
+    </form>
+{% endblock %}
+
