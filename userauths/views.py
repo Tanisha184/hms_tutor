@@ -98,52 +98,59 @@ def logout_view(request):
 def home(request):
     return render(request, 'home.html')
 
-
 def login_view(request):
-        if request.user.is_authenticated:
-            messages.warning(request,"you're already logged in")
-            return redirect("hostel:index")
-        if request.method == 'POST':
-            email = request.POST.get("email")
-            password = request.POST.get("password")
+    if request.user.is_authenticated:
+        messages.warning(request, "You're already logged in.")
+        return redirect("hostel:index")
 
-            try:
-                user_query = user_query.objects.get(email=email)
-                user_auth = authenticate(request, email=email , password=password)
-
-                if user_query is not None:
-                    login(request, user_auth)
-                    messages.success(request, "you are logged in")
-                    next_url = request.GET.get("next", "hotel:index")
-                    return redirect(next_url)
-                else:
-                     messages.error(request, "Username or Password doesn't exists.")
-                     return redirect("userauths:login")   
-            except:
-
-                messages.error(request, "User doesn't exists.")
-                return redirect("userauths:login")
-        return render(request, 'userauths/login.html')
-
+    if request.method == 'POST':
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        
+        user = User.objects.filter(email=email).first()
+        if user:
+            user_auth = authenticate(request, email=email, password=password)
+            if user_auth:
+                login(request, user_auth)
+                messages.success(request, "You are logged in.")
+                next_url = request.GET.get("next", "hostel:index")
+                return redirect(next_url)
+            else:
+                messages.error(request, "Invalid email or password.")
+        else:
+            messages.error(request, "User does not exist.")
+        
+        return redirect("userauths:login")
+        
+    return render(request, 'userauths/login.html')
 
 # def login_view(request):
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             email = form.cleaned_data.get('email')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(email=email, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 messages.success(request, "Login successful.")
-#                 return redirect('hostel:index')
-#             else:
-#                 messages.error(request, "Invalid credentials.")
-#     else:
-#         form = LoginForm()
+#         if request.user.is_authenticated:
+#             messages.warning(request,"you're already logged in")
+#             return redirect("hostel:index")
+#         if request.method == 'POST':
+#             email = request.POST.get("email")
+#             password = request.POST.get("password")
 
-#     return render(request, 'userauths/login.html', {'form': form})
-#     return redirect('hostel:index')
+#             try:
+#                 user_query = user_query.objects.get(email=email)
+#                 user_auth = authenticate(request, email=email , password=password)
+
+#                 if user_query is not None:
+#                     login(request, user_auth)
+#                     messages.success(request, "you are logged in")
+#                     next_url = request.GET.get("next", "hotel:index")
+#                     return redirect(next_url)
+#                 else:
+#                      messages.error(request, "Username or Password doesn't exists.")
+#                      return redirect("userauths:login")   
+#             except:
+
+#                 messages.error(request, "User doesn't exists.")
+#                 return redirect("userauths:login")
+#         return render(request, 'userauths/login.html')
+
+
 
 
 
@@ -153,3 +160,8 @@ def login_view(request):
 #             return redirect("hotel:index")
 #         pass
 
+from django.shortcuts import render
+
+def booking_view(request):
+    # logic for the booking page
+    return render(request, 'hostel/booking.html')

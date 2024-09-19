@@ -1,70 +1,66 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hostel Management System</title>
-    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}" />
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Hostel Management System</h1>
-            <nav>
-                <ul>
-                    {% if request.user.is_authenticated %}
-                        <li><a href="#">Welcome back, {{ request.user.username }}</a></li>
-                        <li><a href="{% url 'userauths:logout' %}">Logout</a></li>
-                    {% else %}
-                        <li><a href="#">Welcome</a></li>
-                        <li><a href="{% url 'userauths:registration' %}">Register</a></li>
-                        <li><a href="{% url 'userauths:login' %}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
+<header>
+    <div class="container">
+        <h1>Hostel Management System</h1>
+        <nav>
+            <ul>
+                {% if request.user.is_authenticated %}
+                    <li><a href="#">Welcome back, {{ request.user.username }}</a></li>
+                    <li><a href="{% url 'userauths:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="#">Welcome</a></li>
+                    <li><a href="{% url 'userauths:registration' %}">Register</a></li>
+                    <li><a href="{% url 'userauths:login' %}">Login</a></li> 
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>Welcome to the Hostel Management System</h1>
+        <p>Your one-stop solution for managing hostel accommodations and services.</p>
+        {% comment %} <div class="cta-buttons">
+            <a href="{% url 'hostel:booking' %}" class="button">Book Now</a>
+            <a href="{% url 'hostel:services' %}" class="button">Explore Services</a>
+        </div> {% endcomment %}
+        <div class="image-container">
+            <img src="{% static 'images/hostel.jpeg' %}" alt="Hostel Image" class="homepage-image" />
         </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h1>Welcome to the Hostel Management System</h1>
-            <p>Your one-stop solution for managing hostel accommodations and services.</p>
-            <div class="cta-buttons">
-                <!-- Your CTA buttons here -->
-            </div>
-            <div class="image-container">
-                <img src="{% static 'images/hostel.jpeg' %}" alt="Hostel Image" class="homepage-image" />
-            </div>
-        </section>
-
-        <section class="signup">
-            <h2>Sign Up</h2>
-            <form action="{% url 'userauths:sign-up' %}" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Sign up</button>
-            </form>
-        </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Hostel Management System. All rights reserved.</p>
+    </section>
+    
+    <section class="popular">
+        <h2>Our Popular Hostels</h2>
+        <div class="hostel-list">
+            {% for hostel in hostels %}
+                <div class="hostel-item">
+                    {% comment %} <a href="{% url 'hostel:booking' hostel.slug %}"> {% endcomment %}
+                        <img src="{{ hostel.image.url }}" alt="{{ hostel.name }}">
+                    </a>
+                    <p>{{ hostel.name }}</p>
+                </div>
+            {% empty %}
+                <p>No hostels available.</p>
+            {% endfor %}
         </div>
-    </footer>
-</body>
-</html>
+    </section>
 
+    <section class="signup">
+        <h2>Sign Up</h2>
+        <form action="{% url 'userauths:sign-up' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign up</button>
+        </form>
+    </section>
+</main>
 
-
-{% if request.user.is_authenticated %}
-<h1>Welcome back {{request.user.username}}</h1>
-{% else %}
-<h1>Welcome</h1>
-<a href="{% url 'userauths:sign-up' %}">Register</a>
-
-<a href=""></a>
-{% endif %} 
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Hostel Management System. All rights reserved.</p>
+    </div>
+</footer>
 {% endblock %}

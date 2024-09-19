@@ -522,3 +522,156 @@ footer {
 footer p {
     text-align: center;
 }
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 20px 0;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px;
+    background-color: #f4f4f4;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-buttons .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.cta-buttons .button:hover {
+    background-color: white;
+    color: black;
+}
+
+.image-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-container img {
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+}
+
+.popular {
+    padding: 50px;
+    text-align: center;
+}
+
+.popular h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.hostel-list {
+    display: flex;
+    justify-content: center;
+}
+
+.hostel-item {
+    margin: 0 15px;
+}
+
+.hostel-item img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.hostel-item p {
+    margin-top: 10px;
+    color: black;
+}
+
+.signup {
+    padding: 50px;
+    text-align: center;
+}
+
+.signup h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.signup form {
+    display: inline-block;
+    text-align: left;
+}
+
+.signup button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.signup button:hover {
+    background-color: white;
+    color: black;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}

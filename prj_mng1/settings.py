@@ -227,3 +227,101 @@ JAZZMIN_UI_TWEAKS = {
     }
 }
 
+# customColorPalette = [
+#   { color: "hsl(4, 90%, 58%)", label: "Red" },
+#   { color: "hsl(340, 82%, 52%)", label: "Pink" },
+#   { color: "hsl(291, 64%, 42%)", label: "Purple" },
+#   { color: "hsl(262, 52%, 47%)", label: "Deep Purple" },
+#   { color: "hsl(231, 48%, 48%)", label: "Indigo" },
+#   { color: "hsl(207, 90%, 54%)", label: "Blue" }
+# ];
+
+# CKEDITOR_5_CONFIGS = {
+#   default: {
+#     toolbar: [
+#       "heading",
+#       "bold",
+#       "italic",
+#       "link",
+#       "bulletedList",
+#       "numberedList",
+#       "blockQuote",
+#       "imageUpload"
+#     ],
+#     language: {
+#       ui: "en",
+#       content: "en"
+#     },
+#     blockToolbar: [
+#       "paragraph",
+#       "heading1",
+#       "heading2",
+#       "heading3",
+#       "bulletedList",
+#       "numberedList",
+#       "blockQuote"
+#     ],
+#     heading: {
+#       options: [
+#         { model: "paragraph", title: "Paragraph", class: "ck-heading_paragraph" },
+#         { model: "heading1", view: "h1", title: "Heading 1", class: "ck-heading_heading1" },
+#         { model: "heading2", view: "h2", title: "Heading 2", class: "ck-heading_heading2" },
+#         { model: "heading3", view: "h3", title: "Heading 3", class: "ck-heading_heading3" }
+#       ]
+#     },
+#     list: {
+#       properties: {
+#         styles: true,
+#         startIndex: true,
+#         reversed: true
+#       }
+#     },
+#     htmlSupport: {
+#       allow: [
+#         {
+#           name: /^.*$/,
+#           attributes: true,
+#           classes: true,
+#           styles: true
+#         }
+#       ]
+#     },
+#     image: {
+#       toolbar: [
+#         "imageTextAlternative",
+#         "|",
+#         "imageStyle:alignLeft",
+#         "imageStyle:alignCenter",
+#         "imageStyle:alignRight",
+#         "imageStyle:side"
+#       ],
+#       styles: [
+#         "full",
+#         "side",
+#         "alignLeft",
+#         "alignCenter",
+#         "alignRight"
+#       ]
+#     },
+#     table: {
+#       contentToolbar: [
+#         "tableColumn",
+#         "tableRow",
+#         "mergeTableCells",
+#         "tableProperties",
+#         "tableCellProperties"
+#       ],
+#       tableProperties: {
+#         borderColors: customColorPalette,
+#         backgroundColors: customColorPalette
+#       },
+#       tableCellProperties: {
+#         borderColors: customColorPalette,
+#         backgroundColors: customColorPalette
+#       }
+#     }
+#   }
+# };
+# settings.py
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
