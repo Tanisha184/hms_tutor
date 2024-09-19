@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user_dashboard',
     'addon',
     'hostel',
+    'booking',
     
     # third party apps
     'import_export',

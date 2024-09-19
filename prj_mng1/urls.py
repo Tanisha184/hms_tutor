@@ -11,6 +11,7 @@ urlpatterns = [
     #Customs URLS
     path("user/", include("userauths.urls")),
     path("", include("hostel.urls")),
+    path("booking/", include("booking.urls")),
 
     #ckeditor
     path("ckeditor5/", include("django_ckeditor_5.urls"))
