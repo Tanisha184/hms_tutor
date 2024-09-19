@@ -675,3 +675,256 @@ footer {
 footer p {
     margin: 0;
 }
+
+
+.utf_listing_section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.utf_listing_headline_part {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.utf_pricing_list_section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.utf_pricing_list_section h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.utf_pricing_list_section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.utf_pricing_list_section li {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.utf_pricing_list_section li:last-child {
+    border-bottom: none;
+}
+
+.utf_pricing_list_section h5 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+.utf_pricing_list_section p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.utf_pricing_list_section span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.show-more-button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover {
+    background-color: #219150;
+}
+
+.show-more-button i {
+    margin-right: 8px;
+}
+
+.show-more {
+    display: none;
+}
+.utf_listing_section {
+    display: block !important;
+}
+
+.show-more {
+    display: block !important;
+}
+
+.utf_pricing_list_section {
+    display: block !important;
+}
+/* Room Availability Section */
+.room-availability {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.room-availability h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.room-availability p {
+    font-size: 16px;
+    color: #666;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.room-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+}
+
+.add-to-selection {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add-to-selection:hover {
+    background-color: #219150;
+}
+
+/* Booking Section */
+.booking {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.booking h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.booking form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.booking label {
+    font-size: 16px;
+    color: #333;
+}
+
+.booking input[type="date"],
+.booking select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.check-availability {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.check-availability:hover {
+    background-color: #219150;
+}
+
+.add-to-wishlist {
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.add-to-wishlist:hover {
+    background-color: #e64a19;
+}
+.room-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.room-item p, .room-item span {
+    margin: 5px 0;
+}
+
+.add-to-selection {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-to-selection:hover {
+    background-color: #0056b3;
+}
+
+.utf_price_plan_feature {
+    margin-top: 15px;
+}
+
+.utf_price_plan_feature ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.utf_price_plan_feature ul li {
+    margin: 5px 0;
+}

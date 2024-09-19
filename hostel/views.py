@@ -24,3 +24,14 @@ def hostel_detail(request, slug):
     }
     return render(request, "hostel/hostel_detail.html", context)
 
+def room_type_detail(request, slug, rt_slug):
+    hostel = Hostel.objects.get(status="Live", slug=slug)
+    room_type = RoomType.objects.get(hostel=hostel,slug=rt_slug)
+    rooms = Room.objects.filter(room_type=room_type, is_available=True)
+
+    context = {
+        "hostel":hostel,
+        "room_type":room_type,
+        "rooms": rooms,
+    }
+    return render(request, "hostel/room_type_detail.html", context)

@@ -16,11 +16,13 @@
         <div class="col-lg-8 col-md-8">
           <div id="titlebar" class="utf_listing_titlebar">
             <div class="utf_listing_titlebar_title">
-              <h2>Valley Forge Music Theater <span class="listing-tag">Music Fair</span></h2>
+              <h2>{{hostel.name}} <span class="listing-tag"></span></h2>
               <span>
                 <a href="#utf_listing_location" class="listing-address">
-                  <i class="sl sl-icon-location"></i> Location Address
-                </a>
+                
+                <span><i class="fa fa-map-marker"></i>{{hostel.address}}</span>
+                <span><i class="fa fa-phone"></i>{{hostel.mobile}}</span><br>
+                <span><i class="fa fa-envelope"></i>{{hostel.email}}</span><br>
               </span>
               <span class="call_now">
                 <i class="sl sl-icon-phone"></i> (415) 796-3633
@@ -42,7 +44,30 @@
         </div>
       </div>
   
-      <!-- Subscribe Section -->
+      <div class="utf_listing_section">
+        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Pricing</h3>
+        <div class="show-more">
+            <div class="utf_pricing_list_section">
+                <h4>Select Pass</h4>
+                <ul>
+                    {% for r in hostel.hostel_room_types %}
+                    <li>
+                        <h5>{{ r.type }}</h5>
+                        <p><strong>Price :</strong> {{ r.price }} persons</p>
+                        <p><strong>Room Capacity :</strong> {{ r.room_capacity }} persons</p>
+                        <span>{{ r.price }}</span>
+                        <p><a href="{% url 'hostel:room_type_detail' hostel.slug r.slug %}" style="border-bottom: 1px gray dashed; margin-top: 10px;">View More</a></p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <a href="#" class="show-more-button" data-more-title="Show More" data-less-title="Show Less">
+            <i class="fa fa-angle-down"></i> Show More
+        </a>
+    </div>
+    
+    
       <div class="container">
         <div class="row">
           <div class="col-md-12">

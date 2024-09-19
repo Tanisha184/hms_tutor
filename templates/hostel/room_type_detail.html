@@ -1,0 +1,92 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="titlebar" class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ room_type.type }}</h2>
+                <nav id="breadcrums">
+                    <ul>
+                        <li><p>{{ rooms.count }} Available Rooms</p></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Room Availability Section -->
+    <section class="room-availability">
+        <h3>Available Rooms</h3>
+        <p><strong>All available rooms have 1 available room</strong></p>
+        
+        <!-- Room List -->
+        <div class="room-list">
+            {% for r in rooms %}
+            <div class="room-item">
+                <p><strong>Room No:</strong> {{ r.room_number }}</p>
+                <span class="value">{{r.room_type.price}}<span>/Per Month</span></span>
+                <p><strong>Capacity:</strong> {{ r.capacity }} 1 person</p>
+                <button class="add-to-selection">Add to Selection</button>
+            </div>
+            
+            {% empty %}
+            <p>No rooms available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% comment %} <div class="container">
+        <!-- Room Availability Section -->
+        <section class="room-availability">
+            <h3>Available Rooms</h3>
+            <p><strong>All available rooms have 1 available room</strong></p>
+    
+            <!-- Room List -->
+            <div class="room-list">
+                {% for r in rooms %}
+                <div class="room-item">
+                    <p><strong>Room No:</strong> {{ r.room_number }}</p>
+                    <span class="value">{{ r.room_type.price }}<span>/Per Month</span></span>
+                    <p><strong>Capacity:</strong> {{ r.capacity }} 1 person</p>
+  
+                </div>
+                <div class="utf_price_plan_feature">
+                    {% comment %} <ul>
+                        <li>Room Capacity: {{ r.room_type.room_capacity }}</li>
+                    </ul> {% endcomment %}
+                    {% comment %} <input type="hidden" class="room_id{{ r.id }}" value="{{ r.id }}" id="room_id_{{ r.id }}">
+                    <input type="hidden" class="room_number{{ r.id }}" value="{{ r.room_number }}" id="room_number_{{ r.id }}">
+                    <button class="add-to-selection" data-index="{{ r.id }}">
+                        <i class="fas fa-shopping-cart"></i>Add to Selection
+                    </button>
+                </div>
+                {% empty %}
+                <p>No rooms available.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </div> {% endcomment %} 
+    <section class="booking">
+        <h3>Booking</h3>
+        <p><strong>Check-in and Check-out Dates:</strong></p>
+    
+        <div class="booking-dates">
+            <label for="check-in-date">Check-in Date:</label>
+            <input type="date" id="check-in-date" name="check_in_date">
+    
+            <label for="check-out-date">Check-out Date:</label>
+            <input type="date" id="check-out-date" name="check_out_date">
+    
+            <button class="check-availability">Check Availability</button>
+        </div>
+    
+        <button class="add-to-wishlist">Add to Wishlist</button>
+    </section>
+    
+</div>
+</div>
+{% endblock %}

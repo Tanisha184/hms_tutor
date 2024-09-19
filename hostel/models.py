@@ -5,6 +5,8 @@ import shortuuid
 from userauths.models import User
 from shortuuid.django_fields import ShortUUIDField
 from django_ckeditor_5.fields import CKEditor5Field
+from taggit.managers import TaggableManager
+
 
 HOSTEL_STATUS = (
     ("draft", "draft"),
@@ -44,7 +46,7 @@ class Hostel(models.Model):
     email = models.EmailField(max_length=100)
     status = models.CharField(max_length=20, choices=HOSTEL_STATUS, default='Live')
 
-    tags = models.CharField(max_length=200, help_text="separate tags with commas")
+    tags = TaggableManager(blank=True)
     views = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
     hid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxy")
@@ -63,6 +65,10 @@ class Hostel(models.Model):
 
     def thumbnail(self):
         return mark_safe("<img src='%s' width='50' style='object-fit: cover; border-radius:6px;'/>" % (self.image.url))
+
+    def hostel_room_types(self):
+        return RoomType.objects.filter(hostel=self)
+
 
 
 class HostelGallery(models.Model):
