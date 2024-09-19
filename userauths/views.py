@@ -160,8 +160,3 @@ def login_view(request):
 #             return redirect("hotel:index")
 #         pass
 
-from django.shortcuts import render
-
-def booking_view(request):
-    # logic for the booking page
-    return render(request, 'hostel/booking.html')

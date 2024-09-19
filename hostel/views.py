@@ -17,13 +17,10 @@ def dashboard(request):
 
 
 
+def hostel_detail(request, slug):
+    hostel = Hostel.objects.get(status="Live", slug=slug)
+    context = {
+        "hostel":hostel
+    }
+    return render(request, "hostel/hostel_detail.html", context)
 
-# def booking(request):
-#     # Implement your booking logic here
-#     # For now, we'll render a simple booking page
-#     return render(request, 'hostel/booking.html')
-
-# def services(request):
-#     # Implement your services logic here
-#     # For now, we'll render a simple services page
-#     return render(request, 'hostel/services.html')

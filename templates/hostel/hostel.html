@@ -36,8 +36,10 @@
         <h2>Our Popular Hostels</h2>
         <div class="hostel-list">
             {% for hostel in hostels %}
+            <div class="utf_carousel_item">
+                
                 <div class="hostel-item">
-                    {% comment %} <a href="{% url 'hostel:booking' hostel.slug %}"> {% endcomment %}
+                    <a href="{% url 'hostel:hostel_detail' hostel.slug %}">
                         <img src="{{ hostel.image.url }}" alt="{{ hostel.name }}">
                     </a>
                     <p>{{ hostel.name }}</p>
