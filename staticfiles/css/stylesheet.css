@@ -141,3 +141,239 @@ footer a:hover {
     padding: 15px;
     font-size: 0.875rem;
 }
+/* Now Available Section Styling */
+.now-available {
+    background-color: #d4edda; /* Light green background for alert */
+    border: 1px solid #c3e6cb; /* Slightly darker green border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 15px; /* Padding around the content */
+    margin: 20px 0; /* Margin on top and bottom */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect for depth */
+}
+
+.now-available .alert {
+    margin: 0; /* Remove default margin */
+}
+
+.now-available .alert-heading {
+    font-size: 1.5rem; /* Slightly larger font size for heading */
+    font-weight: bold; /* Bold font for heading */
+    color: #155724; /* Dark green color for heading */
+}
+
+.now-available p {
+    font-size: 1rem; /* Standard font size for text */
+    color: #155724; /* Dark green color for text */
+    margin: 0; /* Remove default margin */
+}
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+#main_wrapper {
+    padding-top: 50px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #fff;
+    margin: 0;
+}
+
+h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+#titlebar {
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+}
+
+#breadcrumbs {
+    margin-top: 10px;
+}
+
+#breadcrumbs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#breadcrumbs ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+#breadcrumbs ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Selected Rooms Section */
+.utf_listing_payment_section {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.utf_listing_section_form h3 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.utf_pricing_list_section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.utf_pricing_list_section ul li {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Hostel Image and Info */
+.utf_booking_listing_item_containers {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.listing-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.utf_listing_item_content h3 {
+    font-size: 20px;
+    margin: 15px 0 5px;
+}
+
+.utf_listing_item_content span {
+    display: block;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.utf_counter_star_rating {
+    font-size: 14px;
+    color: #f1c40f;
+}
+
+/* Booking Summary Section */
+.boxed-widget {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.boxed-widget h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.boxed-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.boxed-widget ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.boxed-widget ul li span {
+    color: #7f8c8d;
+}
+
+.total-costs {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#main_wrapper {
+    border: 2px solid red;
+}
+/* Billing Section Styling */
+.utf_listing_section_form h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.utf_listing_section_form form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.utf_listing_section_form .form-group {
+    margin-bottom: 15px;
+}
+
+.utf_listing_section_form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.utf_listing_section_form .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.utf_listing_section_form .btn-primary {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.utf_listing_section_form .btn-primary:hover {
+    background-color: #2980b9;
+}
+.checkout-button {
+    background-color: #2ecc71; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Smaller padding for a compact button */
+    font-size: 14px; /* Smaller font size */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    width: auto; /* Auto width to fit text content */
+    text-transform: uppercase; /* Make the text uppercase */
+}
+
+.checkout-button:hover {
+    background-color: #27ae60; /* Darker green on hover */
+}

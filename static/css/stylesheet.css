@@ -2,11 +2,32 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@media (max-width: 768px) {
+    .section-container {
+        flex-direction: column;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 *{
     margin: 0;
     padding: 0;
 
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:root {
+    --primary-color: #007bff;
+    --hover-color: #0056b3;
+    --bg-color: #f9f9f9;
+    --text-color: #333;
 }
 
 body {
@@ -343,11 +364,13 @@ section {
     gap: 1rem;
 }
 .btn {
-    font-weight: 600;
-    transition: all 300ms ease;
-    padding: 1rem;
-    width: 8rem;
-    border-radius: 2rem;
+    padding: 10px 20px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 .btn-color-1, 
 .btn-color-2 {
@@ -713,7 +736,7 @@ footer p {
 }
 
 .utf_pricing_list_section li {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #000000;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -927,4 +950,50 @@ footer p {
 
 .utf_price_plan_feature ul li {
     margin: 5px 0;
+}
+body {
+    color: #333; /* Set a default text color */
+}
+
+h2, h3, h5 {
+    color: #000; /* Set headings to black or another visible color */
+}
+
+form label {
+    color: #000; /* Ensure form labels are visible */
+}
+
+.form-control {
+    color: #333; /* Input text color */
+    background-color: #fff; /* Background color of input fields */
+}
+
+.delete-item {
+    color: red; /* Already set in your code, but good to have here too */
+}
+
+.utf_listing_section {
+    background-color: #dbd6d6; /* Change the background to a light color */
+    padding: 20px; /* Add some padding */
+    border-radius: 5px; /* Optional: add rounded corners */
+}
+
+.utf_pricing_list_section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.utf_pricing_list_section li {
+    margin-bottom: 15px; /* Space between list items */
+    padding: 10px; /* Padding for each list item */
+    border: 1px solid #ddd; /* Add a border around items */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* Background color for items */
+}
+body {
+    background-color: #fff; /* Change to a light color */
+}
+
+.utf_listing_section_form {
+    background-color: #eaeaea; /* Light gray for testing */
 }

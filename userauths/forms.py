@@ -23,3 +23,11 @@ class SignUpForm(forms.ModelForm):
 class LoginForm(AuthenticationForm):
     # You can add additional fields or customizations here if needed
     pass
+
+from django import forms
+from hostel.models import Booking
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['full_name', 'email', 'phone', 'check_in_date', 'check_out_date']

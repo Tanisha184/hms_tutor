@@ -68,24 +68,6 @@ def registration(request):
 
 
 
-# def registration(request):
-#     if request.method == 'POST':
-#         form = UserRegisterForm(request.POST or None)
-
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 messages.success(request, 'Registration successful.')
-#                 return redirect('home')
-#     else:
-#         form = UserRegisterForm()
-
-#     return render(request, 'userauths/registration.html', {'form': form})
-
 
 
 

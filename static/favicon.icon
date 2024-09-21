@@ -1,0 +1,1 @@
+<link rel="icon" href="{% static 'favicon.icon' %}" type="image/x-icon">

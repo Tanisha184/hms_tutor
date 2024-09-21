@@ -1,0 +1,142 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Rooms Selection</title>
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'assets/logo/favicon.png' %}">
+</head>
+    
+<body>
+
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Hostel Management System</h1>
+                <div class="user-info">
+                    <span>Welcome back, Tanisha</span>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="main_wrapper" class="selection_list">
+        <div id="titlebar" class="gradient">
+            <div class='container'>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>All Rooms Selection</h2>
+                        <nav id="breadcrumbs">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Hostel</a></li>
+                                <li><a href="#">Rooms</a></li>
+                                <li><a href="#">My Selected Rooms</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Billing Information Section -->
+        <div class="utf_listing_section_form margin-bottom-40">
+            <h3><i class='fa fa-credit-card'></i> Billing Information</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Checkout</button>
+            </form>
+        </div>
+
+        <div class="container margin-bottom-75">
+            <div class="row">
+                <!-- Left Section: Selected Rooms -->
+                <div class='col-lg-8 col-md-8 utf_listing_payment_section'>
+                    <div class="utf_listing_section_form margin-bottom-40">
+                        <h3><i class='fas fa-bed'></i> Selected Rooms</h3>
+                        <div class="utf_listing_section">
+                            <div class="utf_pricing_list_section">
+                                <ul>
+                                        {% for id, item in data.items %}
+                                            <li>
+                                                <h5>
+                                                    Room: {{ item.room_name }}
+                                                    <small>
+                                                        <a style="cursor: pointer;" class="delete-item" data-item="{{ id }}">
+                                                            <i class="fas fa-trash" style="color: red;"></i> Delete
+                                                        </a>
+                                                    </small>
+                                                </h5>
+                                                <p>Capacity: 4 People</p>
+                                                <p>Facilities: AC, Wi-Fi, Attached Bathroom</p>
+                                                <p>${{ item.room_price }}</p>
+                                            </li>
+                                        {% endfor %}
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Hostel Info and Booking Summary -->
+                <div class='col-lg-4 col-md-4 margin-top-0 utf_listing'>
+                    <div class="utf_booking_listing_item_containers">
+                        <div class="listing-item">
+                            <img src="{% static 'images/utf_listing_item-01.jpg' %}" alt="Hostel Image" />
+
+                            <div class='utf_listing_item_content'>
+                                <h3>Hostel Name</h3>
+                                <span><i class='fa fa-map-marker'></i> The Hostellers</span><br />
+                                <span><i class='fa fa-phone'></i> (+880) 17974578</span>
+                                <div class="utf_counter_star_rating">(18) Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Summary -->
+                    <div class="boxed-widget opening-hours summary margin-top-0">
+                        <h3><i class='fa fa-calendar-check-o'></i> Booking Summary</h3>
+                        <ul>
+                            <li>Check-in <span>{{ checkin }}</span></li>
+                            <li>Check-out <span>{{ checkout }}</span></li>
+                            <li>Total days <span>{{ total_days }}</span></li>
+                            <li class="total-costs">Total cost <span>{{ total_cost }} tk</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}
