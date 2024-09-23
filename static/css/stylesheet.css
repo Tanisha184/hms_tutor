@@ -84,74 +84,6 @@ a:hover {
 
 /* HAMBURGER MENU */
 
-#hamburger-nav {
-    display: none;
-}
-.hamburger-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.hamburger-icon {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 24px;
-    width: 30px;
-    cursor: pointer;
-}
-.hamburger-icon span {
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    transition: all 0.3s ease-in-out;
-}
-.menu-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    width: fit-content;
-    max-height: 0;
-    overflow: hidden;
-    transition:  all 0.3s ease-in-out;
-}
-.menu-links a {
-    display: block;
-    padding: 10px;
-    text-align: center;
-    font-size: 1.5rem;
-    color: black;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.menu-links li {
-    list-style: none;
-
-}
-.menu-links.open {
-    max-height: 300px;
-}
-.hamburger-icon.open span:first-child{
-    transform: rotate(45deg) translate(10px,5px);
-}
-.hamburger-icon.open span:nth-child(2){
-    opacity: 0;
-}
-.hamburger-icon.open span:last-child{
-    transform: rotate(-45deg) translate(10px,-5px);
-}
-.hamburger-icon span:first-child {
-    transform: none;
-    opacity: 1;
-}
-.hamburger-icon span:first-child {
-    opacity: 1;;
-}
-.hamburger-icon span:first-child {
-    transform: none;
-}
 
 /*section*/
 
@@ -159,7 +91,7 @@ a:hover {
 body {
     font-family: Arial, sans-serif;
     color: #333;
-    background-color: #f4f4f4;
+    background-color: #070404;
     margin: 0;
     padding: 0;
 }
@@ -171,7 +103,7 @@ header {
 }
 
 header .container {
-    width: 90%;
+    width: 50%;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -212,8 +144,8 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 70vh; /* Adjust this value as needed */
-    background-color: #fff;
+    height: 60vh; /* Adjust this value as needed */
+    background-color: #000000;
     margin-bottom: 2rem;
     padding: 2rem;
 }
@@ -238,7 +170,7 @@ main {
 }
 
 .homepage-image {
-    max-width: 100%;
+    max-width: 70%;
     height: auto;
     border: 1px solid #ddd;
 }

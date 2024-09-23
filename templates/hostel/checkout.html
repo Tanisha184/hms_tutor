@@ -1,1 +1,242 @@
-{{booking}}
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Hostel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px;
+            padding: 20px;
+            background-color: lightgrey;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .checkout-form, .summary {
+            text-align: center;
+        }
+
+        .checkout-form input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .checkout-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .checkout-form button:hover {
+            background-color: #45a049;
+        }
+
+        .summary h2, .summary p {
+            color: #555;
+        }
+
+        .selected-rooms {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .selected-rooms ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .selected-rooms li {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .selected-rooms h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .selected-rooms p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- Selected Rooms Section -->
+        <div class="selected-rooms">
+            <h2>Selected Rooms</h2>
+            <ul>
+                {% for r in booking.room.all %}
+                    <li>
+                        <h3>{{ r.room_type }}</h3>
+                        <p>Room Number: {{ r.room_number }}</p>
+                        <p>Price: {{ r.room_price }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Checkout</h1>
+
+        <!-- Checkout Form Section -->
+        <div class="checkout-form">
+            <h2>Your Details</h2>
+            <form id="booking-form" onsubmit="return validateForm()">
+                <label for="full_name">Full Name</label>
+                <input type="text" name="full_name" value="{{ booking.full_name }}" placeholder="Enter your full name" required>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" value="{{ booking.email }}" placeholder="Enter your email address" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" value="{{ booking.phone }}" placeholder="Enter your phone number" required>
+
+                <label for="check_in_date">Check-in Date</label>
+                <input type="date" id="checkin" name="check_in_date" value="{{ booking.check_in_date }}" required>
+
+                <label for="checkout">Check-out Date</label>
+                <input type="date" id="checkout" name="checkout" value="{{ booking.check_out_date }}" required>
+
+                <h2>Payment Details</h2>
+                <label for="cardname">Cardholder's Name</label>
+                <input type="text" id="cardname" name="cardname" placeholder="Name on Card" required>
+
+                <label for="cardnumber">Credit Card Number</label>
+                <input type="text" id="cardnumber" name="cardnumber" placeholder="Card Number" required>
+
+                <label for="expdate">Expiry Date</label>
+                <input type="month" id="expdate" name="expdate" required>
+
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+
+                <button type="submit">Complete Booking</button>
+            </form>
+
+            <!-- Booking Summary -->
+            <div class="summary">
+                <h2>Booking Summary</h2>
+                <ul>
+                    <li>Check-in: {{ booking.check_in_date }}</li>
+                    <li>Check-out: {{ booking.check_out_date }}</li>
+                    <li>Discount: ${{ booking.saved }}</li>
+                    <li class="total-costs">Total cost: ${{ booking.total }}</li>
+                </ul>
+            </div>
+        </div>
+
+            <!-- Selected Rooms Section -->
+            <div class="selected-rooms">
+                <h2>Selected Rooms</h2>
+                <ul>
+                    {% for room in selected_rooms %}
+                        <li>
+                            <h3>{{ room.room_type }}</h3>
+                            <p>Room Number: {{ room.room_number }}</p>
+                            <p>Price: ${{ room.price }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+    
+        </div>
+    
+
+        <script>
+            // Function to calculate total cost
+            function calculateTotalCost() {
+                const pricePerNight = 50;  // Example price per night
+                const checkin = new Date(document.getElementById('checkin').value);
+                const checkout = new Date(document.getElementById('checkout').value);
+                
+                if (checkin && checkout && checkin < checkout) {
+                    // Calculate the difference in time (milliseconds) and convert to days
+                    const timeDiff = checkout - checkin;
+                    const nights = timeDiff / (1000 * 60 * 60 * 24);
+    
+                    // Calculate total cost based on number of nights
+                    const totalCost = nights * pricePerNight;
+                    document.getElementById('total-cost').textContent = totalCost;
+                } else {
+                    document.getElementById('total-cost').textContent = '0';  // Reset if invalid dates
+                }
+            }
+    
+            // Add event listeners to update total cost on date change
+            document.getElementById('checkin').addEventListener('change', calculateTotalCost);
+            document.getElementById('checkout').addEventListener('change', calculateTotalCost);
+    
+            // Validate form inputs
+            function validateForm() {
+                const checkin = new Date(document.getElementById('checkin').value);
+                const checkout = new Date(document.getElementById('checkout').value);
+                const expDate = document.getElementById('expdate').value;
+    
+                // Validate check-in and check-out dates
+                if (checkout <= checkin) {
+                    alert("Check-out date must be later than check-in date.");
+                    return false;  // Prevent form submission
+                }
+    
+                // Validate expiration date
+                const [year, month] = expDate.split('-');
+                const expDateObj = new Date(year, month - 1);  // Month is 0-indexed in JavaScript
+                const today = new Date();
+                today.setDate(1); // Set to the first of the month to compare only year and month
+    
+                if (expDateObj < today) {
+                    alert("Credit card has expired.");
+                    return false;  // Prevent form submission
+                }
+    
+                return true;
+            }
+        </script>
+    
+    </body>
+    </html>
+    
+    {% endblock %}
+    

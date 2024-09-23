@@ -19,69 +19,8 @@
     
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        {% comment %} <a class="navbar-brand" href="#">Hostel Management</a> {% endcomment %}
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                {% comment %} <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Hostel Management</h5> {% endcomment %}
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
 
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome back, {{ request.user.username }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'hostel:selected_rooms' %}" class="button border log-in"><i class="fa fa-bed"></i><span class="room-count"></span></a> <!-- Removed {{ request.session.selection_data_obj }} -->
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'userauths:logout' %}">Logout</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'userauths:sign-up' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'userauths:login' %}">Login</a>
-                </li> 
-            {% endif %}
-            
-                </ul>
-            </div>
-        </div>
-    </nav>
-    {% comment %} <nav id="desktop-nav">
-      <div class="logo">Tanisha</div>
-      <div>
-          <ul class="nav-links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#experience">Expierence</a></li>
-              <li><a href="#project">Project</a></li>
-              <li><a href="#contact">Contact</a></li>
-              
-          </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Tanisha</div>
-      <div class="hamburger-menu">
-          <div class="hamburger-icon" onclick="toggleMenu()">
-              <span></span>
-              <span></span>
-              <span></span>
-          </div>
-          <div class="menu-links">
-              <li><a href="#about" onclick="toggleMenu()">Home</a></li>
-              <li><a href="#experience"  onclick="toggleMenu()">Hostel</a></li>
-              <li><a href="#projects"  onclick="toggleMenu()">Dashboard</a></li>
-              <li><a href="#contact"  onclick="toggleMenu()">Blog</a></li>
-          </div>
-      </div>
-  </nav> {% endcomment %}
+
     <main class="container mt-4">
       {% block content%}
       <script>

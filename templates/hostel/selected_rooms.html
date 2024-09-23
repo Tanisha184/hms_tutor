@@ -105,38 +105,66 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Section: Hostel Info and Booking Summary -->
-                <div class='col-lg-4 col-md-4 margin-top-0 utf_listing'>
-                    <div class="utf_booking_listing_item_containers">
-                        <div class="listing-item">
-                            <img src="{% static 'images/utf_listing_item-01.jpg' %}" alt="Hostel Image" />
-
-                            <div class='utf_listing_item_content'>
-                                <h3>Hostel Name</h3>
-                                <span><i class='fa fa-map-marker'></i> The Hostellers</span><br />
-                                <span><i class='fa fa-phone'></i> (+880) 17974578</span>
-                                <div class="utf_counter_star_rating">(18) Reviews</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Booking Summary -->
-                    <div class="boxed-widget opening-hours summary margin-top-0">
-                        <h3><i class='fa fa-calendar-check-o'></i> Booking Summary</h3>
-                        <ul>
-                            <li>Check-in <span>{{ checkin }}</span></li>
-                            <li>Check-out <span>{{ checkout }}</span></li>
-                            <li>Total days <span>{{ total_days }}</span></li>
-                            <li class="total-costs">Total cost <span>{{ total_cost }} tk</span></li>
-                        </ul>
-                    </div>
-                </div>
+<!-- Right Section: Hostel Info and Booking Summary -->
+<div class='col-lg-4 col-md-4 margin-top-0 utf_listing'>
+    <div class="utf_booking_listing_item_containers">
+        <div class="listing-item">
+            <img src="{% static 'images/utf_listing_item-01.jpg' %}" alt="Hostel Image" />
+            <!-- Replace static content with real-time input data -->
+            <div class='utf_listing_item_content'>
+                <h3>Hostel Name</h3>
+                <span><i class='fa fa-map-marker'></i> <input type="text" id="hostel_name" name="hostel_name" value="The Hostellers" class="form-control" readonly></span><br />
+                <span><i class='fa fa-phone'></i> <input type="text" id="hostel_phone" name="hostel_phone" value="(+880) 17974578" class="form-control" readonly></span>
+                <div class="utf_counter_star_rating">(18) Reviews</div>
             </div>
         </div>
     </div>
+
+    <!-- Booking Summary Form -->
+    <div class="boxed-widget opening-hours summary margin-top-0">
+        <h3><i class='fa fa-calendar-check-o'></i> Booking Summary</h3>
+        <h3><i class='fa fa-calendar-check-o'></i>{{booking.hostel.name}}</h3>
+        <form id="booking-summary-form" method="POST" action="">
+            {% csrf_token %}
+            <ul>
+                <li>
+                    Check-in 
+                    <input type="date" id="checkin_date" name="checkin_date" class="form-control" required>
+                </li>
+                <li>
+                    Check-out 
+                    <input type="date" id="checkout_date" name="checkout_date" class="form-control" required>
+                </li>
+                <li>
+                    Total days 
+                    <input type="text" id="total_days" name="total_days" class="form-control" readonly>
+                </li>
+                <li class="total-costs">
+                    Total cost 
+                    <input type="text" id="total_cost" name="total_cost" class="form-control" readonly>
+                </li>
+            </ul>
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
 
 </body>
 </html>
 
 {% endblock %}
+
+
+
+{% comment %} <div class="boxed-widget opening-hours summary margin-top-0">
+    <h3><i class="fa fa-calendar-check-o"></i>Booking Summary</h3>
+    <ul>
+        <li>check-in <span>{{booking.check_in_date}}</span></li>
+        <li>check-out <span>{{booking.check_out_date}}</span></li>
+        <li>Discount <span>-${{booking.saves}}</span></li>
+
+
+        <li class='total-costs'>Total cost<span>{{booking.total}}</span></li>
+    </ul>
+</div> {% endcomment %}

@@ -21,14 +21,12 @@
 
 <main>
     <section class="hero">
-        <h1>Welcome to the Hostel Management System</h1>
-        <p>Your one-stop solution for managing hostel accommodations and services.</p>
-        {% comment %} <div class="cta-buttons">
-            <a href="{% url 'hostel:booking' %}" class="button">Book Now</a>
-            <a href="{% url 'hostel:services' %}" class="button">Explore Services</a>
-        </div> {% endcomment %}
+        <h1>Welcome to Tarc</h1>
+        <h2><p>Find your Jiboner Mane Here.</p></h2>
+    
         <div class="image-container">
-            <img src="{% static 'images/hostel.jpeg' %}" alt="Hostel Image" class="homepage-image" />
+            <img src="{% static 'images/tarc-1.jpg' %}" alt="tarc-1" class="homepage-image" />
+
         </div>
     </section>
     
@@ -50,7 +48,7 @@
     </section>
     
 
-    <section class="signup">
+    {% comment %} <section class="signup">
         <h2>Sign Up</h2>
         <form action="{% url 'userauths:sign-up' %}" method="POST">
             {% csrf_token %}
@@ -58,11 +56,6 @@
             <button type="submit">Sign up</button>
         </form>
     </section>
-</main>
+</main> {% endcomment %}
 
-<footer>
-    <div class="container">
-        <p>&copy; 2024 Hostel Management System. All rights reserved.</p>
-    </div>
-</footer>
 {% endblock %}
