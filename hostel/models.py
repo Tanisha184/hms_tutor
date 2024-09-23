@@ -6,7 +6,11 @@ from userauths.models import User
 from shortuuid.django_fields import ShortUUIDField
 from django_ckeditor_5.fields import CKEditor5Field
 from taggit.managers import TaggableManager
+from django import forms
 
+class BookingForm(forms.Form):
+    check_in = forms.DateField(input_formats=['%Y-%m-%d'])  # adjust the format if necessary
+    check_out = forms.DateField(input_formats=['%Y-%m-%d'])
 
 HOSTEL_STATUS = (
     ("draft", "draft"),

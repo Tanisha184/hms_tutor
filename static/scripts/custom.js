@@ -52,8 +52,10 @@ $(document).ready(function(){
         let room_id = $(`.room_id_${id}`).val();
         let room_number = $(`.room_number_${id}`).val();
         let hostel_name = $("#hostel_name").val();
-        let room_name = $("#room_name").val();
-        let room_price = $("#room_price").val();
+        let room_name = $(`.room_name_${id}`).val(); // Now using the correct selector
+        let room_price = $(`.room_price_${id}`).val()
+        // let room_name = $("#room_name").val();
+        // let room_price = $("#room_price").val();
         let room_type = $("#room_type").val();
         let checkin = $("#checkin").val();
         let checkout = $("#checkout").val();

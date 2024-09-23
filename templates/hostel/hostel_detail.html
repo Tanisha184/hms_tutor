@@ -3,6 +3,11 @@
 {% block content %}
 
 <!-- Wrapper -->
+<head>
+    <!-- Other head content -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
 <div id="main_wrapper">
     <header id="header_part" class="fullwidth"></header>
 
@@ -20,9 +25,9 @@
                         <h2>{{hostel.name}} <span class="listing-tag"></span></h2>
                         <span>
                             <a href="#utf_listing_location" class="listing-address">
-                            <span><i class="fa fa-map-marker"></i>{{hostel.address}}</span>
-                            <span><i class="fa fa-phone"></i>{{hostel.mobile}}</span><br>
-                            <span><i class="fa fa-envelope"></i>{{hostel.email}}</span><br>
+                            <span><i class="fa fa-map-marker"></i> {{hostel.address}}</span><br>
+                            <span><i class="fa fa-phone"></i> {{hostel.mobile}}</span><br>
+                            <span><i class="fa fa-envelope"></i> {{hostel.email}}</span><br>
                         </span>
                         <span class="call_now">
                             <i class="sl sl-icon-phone"></i> (415) 796-3633
@@ -49,8 +54,10 @@
                         <div class="utf_pricing_list_section">
                             <h4>Select Pass</h4>
                             <ul>
-                                {% for r in hostel.hostel_room_types %}
-                                <li>
+                                {% for r in hostel.hostel_room_types.all %}
+
+                                <li>    
+                                    
                                     <h5>{{ r.type }}</h5>
                                     <p><strong>Price :</strong> {{ r.price }} persons</p>
                                     <p><strong>Room Capacity :</strong> {{ r.room_capacity }} persons</p>
@@ -92,7 +99,7 @@
                 </div>
             </div>
 
-<!-- Sidebar with Booking Section -->
+{% comment %} <!-- Sidebar with Booking Section -->
 <div class="col-lg-4 col-md-4">
     <div class="utf_listing_sidebar">
         <div class="utf_box_widget margin-top-35">
@@ -117,10 +124,13 @@
                     <div class="with-form margin-top-30">
                         <div class="col-lg-12 col-md-12">
                             <label for="room-type-select">Select Room Type</label>
+                            <option value="">Select Room Type</option>
                             <select name="room-type" id="room-type-select" class="utf_chosen_select_single" required>
-                                <option value="">Select Room Type</option>
-                                <option value="premium">Premium</option>
-                                <option value="normal">Normal</option>
+                                {% for r in hostel.hostel_room_types %}
+                                    
+                                    <option value="{{r.slug}}">{{r.type}}</option>
+                                    
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -130,9 +140,15 @@
             </div>
         </div>
     </div>
-</div>
+</div>  {% endcomment %}
 
 {% endblock %}
+
+
+
+
+
+
 
 
 

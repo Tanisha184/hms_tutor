@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block content %}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Other head elements -->
+</head>
+
 <div id="titlebar" class="gradient">
     <div class="container">
         <div class="row">
@@ -14,8 +19,6 @@
                 </nav>
             </div>
         </div>
-
-
     </div>
 </div>
 <div class="container">
@@ -30,7 +33,7 @@
             {% for r in rooms %}
             <div class="room-item">
                 <p><strong>Room No:</strong> {{ r.room_number }}</p>
-                <span class="value">{{ r.room_type.price }}<span>/Per Month</span></span>
+                <span class="value">{{ r.room_type.price }}<span>/Per Day</span></span>
                 <p><strong>Capacity:</strong> {{ r.capacity }} person</p>
         
                 <input type="hidden" class="room_id_{{ r.id }}" value="{{ r.id }}" id="room_id">

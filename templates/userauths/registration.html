@@ -1,0 +1,514 @@
+
+def selected_rooms(request):
+    total = 0 
+    room_count = 0
+    total_days = 0
+    checkin = ""
+    checkout = ""
+    
+
+
+    if 'selection_data_obj' in request.session:
+        hostel = None
+        if request.method == "POST":
+            for h_id, item in request.session['selection_data_obj'].items():
+                id = int(item['hostel_id'])
+                checkin = item.get('checkin')
+                checkout = item.get('checkout')
+                room_type_ = int(item['room_type'])
+                room_id = int(item['room_id'])
+
+                user = request.user
+                hostel = Hostel.objects.get(id=id)
+                room = Room.objects.get(id=room_id)
+                room_type = RoomType.objects.get(id=room_type_)
+
+            date_format = "%Y-%m-%d"
+            checkin_date = datetime.strptime(checkin, date_format)
+            checkout_date = datetime.strptime(checkout, date_format)
+            total_days = (checkout_date - checkin_date).days
+            
+            full_name = request.POST.get("full_name")
+            email = request.POST.get("email")
+            phone = request.POST.get("phone")
+
+            booking = Booking.objects.create(
+                    hostel=hostel,
+                    room_type=room_type,
+                    check_in_date=checkin,
+                    check_out_date=checkout,
+                    total_days=total_days,
+                    full_name=full_name,
+                    email=email,
+                    phone=phone,
+                    user=request.user or None
+            )
+
+            for h_id, item in request.session['selection_data_obj'].items():
+                    room_id = int(item["room_id"])
+                    room = Room.objects.get(id=room_id)
+                    booking.room.add(room)
+                    room_count += 1
+                    days = total_days
+                    price = room_type.price
+
+                    room_price = price * room_count
+                    total = room_price * days
+                
+                booking.total += float(total)
+                booking.before_discount += float(total)
+                booking.save()
+                return redirect("hostel:checkout", booking.booking_id)
+        hostel=None
+        #If it's a GET request or after processing POST
+        for h_id, item in request.session['selection_data_obj'].items():
+            id = int(item['hostel_id'])
+            checkin = item.get('checkin', '')
+            checkout = item.get('checkout', '')
+            room_type_ = int(item['room_type'])
+            room_id = int(item['room_id'])
+
+            room_type = RoomType.objects.get(id=room_type_)
+
+            if not checkin or not checkout:
+                messages.warning(request, "Check-in and check-out dates are required.")
+                return render(request, "hostel/selected_rooms.html", context)
+            
+            date_format = "%Y-%m-%d"
+            try:
+                checkin_date = datetime.strptime(checkin, date_format)
+                checkout_date = datetime.strptime(checkout, date_format)
+                total_days = (checkout_date - checkin_date).days
+            except ValueError:
+                messages.error(request, "Invalid date format.")
+                return render(request, "hostel/selected_rooms.html", context)
+
+            room_count += 1
+            price = room_type.price
+            total += price * total_days  # Calculate total price
+            
+            hostel = Hostel.objects.get(id=id)
+        
+        context = {
+            "data": request.session['selection_data_obj'],
+            "total_selected_items": len(request.session['selection_data_obj']),
+            'total': total,
+            'checkin': checkin,
+            'checkout': checkout,
+            'hostel': hostel,
+        }
+        return render(request, "hostel/selected_rooms.html", context)
+    else:
+        messages.warning(request, "No Selected room")
+        return render(request, "hostel/selected_rooms.html", context)
+# from django.shortcuts import redirect
+
+
+
+
+
+
+
+def selected_rooms(request):
+    total = 0 
+    room_count = 0
+    total_days = 0
+    checkin = ""
+    checkout = ""
+
+    if 'selection_data_obj' in request.session:
+        has_valid_selection = False
+        print("/////////////:", request.session['selection_data_obj'])
+        hostel = None
+        for h_id, item in request.session['selection_data_obj'].items():
+            id = int(item['hostel_id'])
+            checkin = item.get('checkin')  # Use .get() to avoid KeyError
+            checkout = item.get('checkout')
+            room_type_ = int(item['room_type'])
+            room_id = int(item['room_id'])
+
+            user = request.user
+            hostel = Hostel.objects.get(id=id)
+            room = Room.objects.get(id=room_id)
+            room_type = RoomType.objects.get(id=room_type_)
+
+            date_format = "%Y-%m-%d"
+            if checkin and checkout and checkin != 'None' and checkout != 'None':
+                has_valid_selection = True
+                break  # No need to check further
+            # Check if checkin and checkout are not None
+            if checkin and checkout:
+                try:
+                    checkin_date = datetime.strptime(checkin, date_format)
+                    checkout_date = datetime.strptime(checkout, date_format)
+                    time_difference = checkout_date - checkin_date
+                    total_days = time_difference.days
+
+                    if total_days < 0:
+                        messages.error(request, "Check-out date must be after check-in date.")
+                        return render(request, "hostel/selected_rooms.html")
+
+                    room_count += 1
+                    price = room_type.price
+                    room_price = price * room_count
+                    total += room_price * total_days
+                    print(total)
+                except ValueError:
+                    messages.error(request, "Invalid date format. Please ensure the dates are in YYYY-MM-DD format.")
+                    return render(request, "hostel/selected_rooms.html")
+            else:
+                messages.error(request, "Check-in and check-out dates must be provided.")
+                return render(request, "hostel/selected_rooms.html")
+
+        context = {
+            "data": request.session['selection_data_obj'],
+            "total_selected_items": len(request.session['selection_data_obj']),
+            'total': total,
+            'checkin': checkin,
+            'checkout': checkout,
+            'hostel': hostel,
+        }
+        return render(request, "hostel/selected_rooms.html")
+
+    else:
+        messages.warning(request, "No selected room.")
+        return render(request, "hostel/selected_rooms.html", context)
+    
+
+
+
+
+
+        # def selected_rooms(request):
+        #     total = 0 
+        #     room_count = 0
+        #     total_days = 0
+        #     checkin = ""
+        #     checkout = ""
+        #     hostel = None
+        #     if 'selection_data_obj' in request.session:
+        #         print(request.session.get('selection_data_obj'))
+        
+        #         if request.method == "POST":
+        #           for h_id, item in request.session['selection_data_obj'].items():
+        #             id = int(item['hostel_id'])
+        #             checkin = item.get('checkin', '')  # Use .get() to avoid KeyError
+        #             checkout = item.get('checkout', '')
+        #             room_type_ = int(item['room_type'])
+        #             room_id = int(item['room_id'])
+        
+        #             user = request.user
+        #             hostel = Hostel.objects.get(id=id)
+        #             room = Room.objects.get(id=room_id)
+        #             room_type = RoomType.objects.get(id=room_type_)
+        
+        #           date_format = "%Y-%m-%d"
+        #           checkin_date = datetime.strptime(checkin, date_format)
+        #           checkout_date = datetime.strptime(checkout, date_format)
+        #           time_difference = checkout_date - checkin_date
+        #           total_days = time_difference.days
+                
+        #           full_name = request.POST.get("full_name")
+        #           email = request.POST.get("email")
+        #           phone = request.POST.get("phone")
+                  
+        
+        #           booking = Booking.objects.create(
+        #               hostel = hostel,
+        #               room_type=room_type,
+        #               check_in_date = checkin,
+        #               check_out_date = checkout,
+        #               total_days=total_days,
+        #               full_name = full_name,
+        #               email=email,
+        #               phone = phone,
+        #               user=request.user or None
+        #           )
+        
+        #           for h_id, item in request.session['selection_data_obj'].items():
+        #               room_id = int(item["room_id"])
+        #               room=Room.objects.get(id=room_id)
+        #               booking.room.add(room)
+        #               room_count += 1
+        #               days = total_days
+        #               price = room_type.price
+        
+        #               room_price = price * room_count
+        #               total = room_price * days
+                      
+        #           booking.total+=float(total)
+        #           booking.before_discount += float(total)
+        #           booking.save()
+        #           return redirect("hostel:checkout", booking.booking_id)
+        
+        #         hostel = None
+        #         for h_id, item in request.session['selection_data_obj'].items():
+        #             id = int(item['hostel_id'])
+        #             checkin = item.get('checkin', '')  # Use .get() to avoid KeyError
+        #             checkout = item.get('checkout', '')
+        #             room_type_ = int(item['room_type'])
+        #             room_id = int(item['room_id'])
+        
+        #             room_type = RoomType.objects.get(id=room_type_)
+        
+                    
+        #             if not checkin or not checkout:
+        #                 messages.warning(request, "Check-in and check-out dates are required.")
+        #                 return render(request, "hostel/selected_rooms.html", context)
+                    
+        #             date_format = "%Y-%m-%d"
+        
+        #             # Ensure the checkin and checkout values are valid before parsing
+        #             try:
+        #                 checkin_date = datetime.strptime(checkin, date_format)
+        #                 checkout_date = datetime.strptime(checkout, date_format)
+        #             except ValueError as e:
+        #                 messages.error(request, "Invalid date format.")
+        #                 return render(request, "hostel/selected_rooms.html")
+        
+        #             time_difference = checkout_date - checkin_date
+        #             total_days = time_difference.days
+                    
+        #             room_count += 1
+        #             days = total_days
+        #             price = room_type.price
+        
+        #             room_price = price * room_count
+        #             total = room_price * days
+        #             hostel = Hostel.objects.get(id=id)
+        #         context = {
+        #             "data": request.session['selection_data_obj'],
+        #             "total_selected_items": len(request.session['selection_data_obj']),
+        #             'total':total,
+        #             'checkin':checkin,
+        #             'checkout':checkout,
+        #             'hostel':hostel,
+        #         }
+        #         print(context)
+        #         return render(request, "hostel/selected_rooms.html",context)
+        #     else:
+        #         messages.warning(request, "No Selected room")
+        #         return render(request, "hostel/selected_rooms.html", context)
+        
+        
+        def checkout(request, booking_id):
+            print(f"Checkout view reached with booking_id: {booking_id}")
+            booking = Booking.objects.get(booking_id=booking_id)
+        
+            context = {
+                "booking": booking
+            }
+            return render(request, "hostel/checkout.html", context)
+        
+        
+        
+        # def selected_rooms(request):
+        #     total = 0 
+        #     room_count = 0
+        #     total_days = 0
+        #     selected_rooms = {}
+        
+        #     if request.method == "POST":
+        #         full_name = request.POST.get("full_name")
+        #         email = request.POST.get("email")
+        #         phone = request.POST.get("phone")
+        
+        #         if 'selection_data_obj' in request.session:
+                
+        #             selected_rooms = request.session['selection_data_obj']
+        #             for h_id, item in request.session['selection_data_obj'].items():
+        #                 checkin = item.get('checkin')
+        #                 checkout = item.get('checkout')
+        
+        #                 if checkin and checkout:
+        #                     try:
+        #                         id = int(item['hostel_id'])
+        #                         room_type_ = int(item['room_type'])
+        #                         room_id = int(item['room_id'])
+        
+        #                         room_type = RoomType.objects.get(id=room_type_)
+        #                         hostel = Hostel.objects.get(id=id)
+        
+        #                         # Calculate total days
+        #                         checkin_date = datetime.strptime(checkin, "%Y-%m-%d")
+        #                         checkout_date = datetime.strptime(checkout, "%Y-%m-%d")
+        #                         total_days = (checkout_date - checkin_date).days
+        
+        #                         if total_days > 0:
+        #                             price = room_type.price
+        #                             total += price * total_days
+        #                             room_count += 1
+        
+        #                             # Create the booking
+        #                             booking = Booking.objects.create(
+        #                                 hostel=hostel,
+        #                                 room_type=room_type,
+        #                                 check_in_date=checkin_date,
+        #                                 check_out_date=checkout_date,
+        #                                 total_days=total_days,
+        #                                 full_name=full_name,
+        #                                 email=email,
+        #                                 phone=phone,
+        #                                 user=request.user or None
+        #                             )
+        
+        #                             # Associate rooms with booking
+        #                             room = Room.objects.get(id=room_id)
+        #                             booking.room.add(room)
+        #                             booking.total += float(total)
+        #                             booking.before_discount += float(total)
+        #                             booking.save()
+        
+        #                             # Redirect to checkout page
+        #                             return redirect("hostel:checkout", booking_id=booking.id)
+        
+        #                     except ValueError as ve:
+        #                         messages.error(request, f"Invalid data for room ID {item['room_id']}: {ve}")
+        #                 else:
+        #                     messages.warning(request, f"Missing check-in or check-out date for room ID: {item['room_id']}")
+        #         else:
+        #             messages.warning(request, "No Selected room")
+        #             
+        #     else:
+        #         if 'selection_data_obj' in request.session:
+        #             selected_rooms = request.session['selection_data_obj']
+        
+        #             for h_id, item in selected_rooms.items():
+        #                 checkin = item.get('checkin')
+        #                 checkout = item.get('checkout')
+        #                 # (Continue with the existing logic to calculate total, room_count, etc.)
+        
+        #     return render(request, "hostel/selected_rooms.html", {
+        #         'selected_rooms': selected_rooms,
+        #         'total_price': total,
+        #         'total_days': total_days,
+        #         'room_count': room_count,
+        #     })
+        
+        
+        
+        
+        
+        
+        # def selected_rooms(request):
+        #     total = 0 
+        #     room_count = 0
+        #     total_days = 0
+        #     selected_rooms = {}
+        
+        
+        #     if 'selection_data_obj' in request.session:
+                
+        #         selected_rooms = request.session['selection_data_obj']
+        
+        #         for h_id, item in selected_rooms.items():
+        #             checkin = item.get('checkin')
+        #             checkout = item.get('checkout')
+        
+                    
+        
+        #             # Check if checkin and checkout are valid
+        #             if checkin and checkout:  # Ensure both dates are not None
+        #                 try:
+        #                     id = int(item['hostel_id'])
+        #                     room_type_ = int(item['room_type'])
+        #                     room_id = int(item['room_id'])
+        
+        #                     room_type = RoomType.objects.get(id=room_type_)
+        
+        #                     # Calculate total days as a simple difference in string representation
+        #                     checkin_date = datetime.strptime(checkin, "%Y-%m-%d")
+        #                     checkout_date = datetime.strptime(checkout, "%Y-%m-%d")
+        #                     time_difference = (checkout_date - checkin_date).days 
+        #                     hostel = Hostel.objects.get(id=id)
+        #                     # Ensure time_difference is valid
+        #                     if time_difference > 0:
+        #                         total_days += time_difference
+        #                         room_count += 1
+        #                         price = room_type.price
+        #                         total += price * total_days
+        
+        #                         print("Checkin:", checkin)
+        #                         print("tttttttttttttttttttt:", total_days)
+        #                     else:
+        #                         messages.warning(request, f"Checkout date must be after check-in date for room ID: {item['room_id']}")
+        #                 except ValueError as ve:
+        #                     messages.error(request, f"Invalid data for room ID {item['room_id']}: {ve}")
+        #             else:
+        #                 messages.warning(request, f"Missing check-in or check-out date for room ID: {item['room_id']}")
+            
+        #     else:
+        #         messages.warning(request, "No Selected room")
+        #         return redirect("/")
+        
+        #     return render(request, "hostel/selected_rooms.html", {
+        #         'selected_rooms': selected_rooms,
+        #         'total_price': total,
+        #         'total_days': total_days,
+        #         'room_count': room_count,
+        #     })
+        ##################################################
+        
+        # def selected_rooms(request):
+        #     total = 0 
+        #     room_count = 0
+        #     total_days = 0
+        #     checkin = ""
+        #     checkout = ""
+        #     context = {}  # Initialize context
+        
+        #     print("selected_rooms view reached")  # This will show if the view is hit
+        #     ...
+        
+        #     if 'selection_data_obj' in request.session:
+        #         hostel = None
+        #         for h_id, item in request.session['selection_data_obj'].items():
+        #             id = int(item['hostel_id'])
+        #             checkin = item.get('checkin', "")  # Use .get() to avoid KeyError
+        #             checkout = item.get('checkout', "")
+        #             room_type_ = int(item['room_type'])
+        #             room_id = int(item['room_id'])
+        
+        #             user = request.user
+        #             hostel = Hostel.objects.get(id=id)
+        #             room = Room.objects.get(id=room_id)
+        #             room_type = RoomType.objects.get(id=room_type_)
+        
+        #             date_format = "%Y-%m-%d"
+        #             checkin_date = datetime.strptime(checkin, date_format)
+        #             checkout_date = datetime.strptime(checkout, date_format)
+        #             time_difference = checkout_date - checkin_date
+        #             total_days = time_difference.days
+        
+        #             room_count += 1
+        #             days = total_days
+        #             price = room_type.price
+        
+        #             room_price = price * room_count
+        #             total += room_price * days  # Accumulate total for all rooms
+        #         print("hostelllllllllll",hostel)
+        #         context = {
+        #             "data": request.session['selection_data_obj'],
+        #             "total_selected_items": len(request.session['selection_data_obj']),
+        #             'total': total,
+        #             'checkin': checkin,
+        #             'checkout': checkout,
+        #             'hostel': hostel,
+        #         }
+        #     else:
+        #         messages.warning(request, "No Selected room")
+        #         context['message'] = "No rooms selected."  # Add a message to the context
+        
+        #     return render(request, "hostel/selected_rooms.html", context)
+            
+        
+        #888888888888888888888888888888888888888888888888888888
+        # from datetime import datetime
+        # from django.contrib import messages
+        # from django.shortcuts import render
+        # from .models import Hostel, Room, RoomType  # Adjust import as necessary
+        # from django.shortcuts import render, redirect
+        # from django.contrib import messages
+        # from hostel.models import Hostel, Room, RoomType, Booking
+        # from datetime import datetime
+        

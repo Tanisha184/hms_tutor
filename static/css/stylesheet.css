@@ -283,6 +283,174 @@ section {
     gap: 1rem;
 }
 
+
+
+
+
+
+
+
+#main_wrapper {
+    background-color: #f9f9f9; /* Light background color for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+body {
+    font-family: 'Roboto', sans-serif; /* Replace 'Roboto' with your chosen font */
+}
+
+.utf_listing_titlebar {
+    background-color: #fff; /* White background for title bar */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.utf_listing_titlebar_title h2 {
+    font-size: 2rem;
+    margin: 0;
+    color: #333; /* Dark text color */
+}
+
+.listing-address {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666; /* Grey text color for contact info */
+}
+
+.call_now {
+    font-weight: bold;
+    color: #4CAF50; /* Green color for call button */
+    margin-top: 10px;
+}
+
+.utf_star_rating_section {
+    margin-top: 5px;
+}
+
+.listing_item_social {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.listing_item_social li {
+    margin: 0 5px;
+}
+
+.listing_item_social a {
+    text-decoration: none;
+    color: #151616; /* Bootstrap primary color */
+    transition: color 0.3s;
+}
+
+.listing_item_social a:hover {
+    color: #07121e; /* Darker shade on hover */
+}
+
+.now_open {
+    background-color: #4CAF50; /* Green background for "Open Now" */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.now_open:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+.gradient {
+    background: linear-gradient(135deg, #cbc6d3, #11141848);
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+#titlebar h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#breadcrumbs {
+    margin-top: 10px;
+}
+
+.room-availability {
+    margin-top: 30px;
+}
+
+.room-availability h3 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.room-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px); /* Responsive width */
+    position: relative;
+}
+
+.room-item p {
+    margin: 10px 0;
+}
+
+.value {
+    font-weight: bold;
+    color: #0f1c0f; /* Green color for price */
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .room-item {
+        width: calc(50% - 20px); /* Two items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .room-item {
+        width: 100%; /* Full width on very small screens */
+    }
+}
+
+
+
+
 /*ICON*/
 .icon {
     cursor: pointer;
@@ -489,6 +657,46 @@ body {
     font-family: Arial, sans-serif;
     background-color: white;
     color: black;
+}
+header {
+    background-color: #2c3e50; /* Dark blue background */
+    color: white; /* White text color */
+    padding: 20px 0; /* Top and bottom padding */
+    text-align: center; /* Center text */
+}
+
+.container {
+    max-width: 1200px; /* Limit the width */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Side padding */
+}
+
+h1 {
+    font-size: 2.5rem; /* Larger font size for the title */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+nav ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: center; /* Center the items */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between items */
+}
+
+nav ul li a {
+    color: white; /* White link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 1.1rem; /* Font size for links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+nav ul li a:hover {
+    color: #f39c12; /* Change color on hover */
 }
 
 header {
@@ -861,7 +1069,7 @@ footer p {
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #7a8897;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
@@ -923,9 +1131,121 @@ form label {
     background-color: #fff; /* Background color for items */
 }
 body {
-    background-color: #fff; /* Change to a light color */
+    background-color: #e9e2e2; /* Change to a light color */
 }
 
 .utf_listing_section_form {
     background-color: #eaeaea; /* Light gray for testing */
+}
+.utf_listing_section_form {
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Add padding */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 40px; /* Spacing below */
+}
+
+.utf_listing_section_form h3 {
+    font-size: 24px; /* Adjust heading size */
+    color: #333; /* Darker text color */
+    margin-bottom: 20px; /* Spacing below heading */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Spacing between form groups */
+}
+
+.form-group label {
+    font-weight: bold; /* Bold labels */
+    color: #555; /* Darker label color */
+}
+
+.form-control {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    transition: border-color 0.3s; /* Transition effect */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove outline */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Button color */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+.utf_listing_section_form {
+    background-color: #fefefe; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding for the section */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.room-item {
+    border-bottom: 1px solid #ddd; /* Separator line */
+    padding: 15px 0; /* Spacing */
+}
+
+.room-item:last-child {
+    border-bottom: none; /* Remove border for last item */
+}
+
+.room-price {
+    font-weight: bold; /* Highlight price */
+    color: #007bff; /* Primary color */
+}
+
+.listing-image {
+    width: 100%; /* Full width */
+    border-radius: 8px; /* Rounded corners for image */
+    margin-bottom: 15px; /* Spacing below image */
+}
+
+.boxed-widget {
+    background-color: #f8f9fa; /* Light background for summary */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.boxed-widget h3, .boxed-widget h4 {
+    margin-bottom: 15px; /* Spacing below heading */
+    color: #333; /* Darker text color */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Button color */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+.image-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between images */
+    align-items: center; /* Align vertically */
+    margin-bottom: 20px; /* Space below the images */
+}
+
+.side-image {
+    width: 48%; /* Make each image 48% of the container */
+    border-radius: 8px; /* Rounded corners */
+    object-fit: cover; /* Maintain aspect ratio */
 }
